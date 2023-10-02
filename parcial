@@ -1,0 +1,79 @@
+#include <iostream>
+#include <queue>
+using namespace std;
+
+
+struct Nodo {
+    int valor;
+    Nodo* izquierda;
+    Nodo* derecha;
+    Nodo(int val) : valor(val), izquierda(nullptr), derecha(nullptr) {}
+};
+
+
+int rangoMasAlejado(Nodo* raiz) {
+    if (raiz == nullptr) {
+        return 0;
+    }
+
+    queue<Nodo*> cola;
+    cola.push(raiz);
+    int nivel = 0;
+
+    while (!cola.empty()) {
+        int tamano = cola.size();
+        nivel++;
+
+        for (int i = 0; i < tamano; i++) {
+            Nodo* nodo = cola.front();
+            cola.pop();
+
+            if (nodo->izquierda != nullptr) {
+                cola.push(nodo->izquierda);
+            }
+
+            if (nodo->derecha != nullptr) {
+                cola.push(nodo->derecha);
+            }
+        }
+    }
+
+    return nivel + 6; 
+}
+
+
+void imprimirArbol(Nodo* raiz, int nivel) {
+    if (raiz == nullptr) {
+        return;
+    }
+
+    imprimirArbol(raiz->derecha, nivel + 3);
+
+    for (int i = 0; i < nivel; i++) {
+        cout << " "; 
+}
+    cout << raiz->valor << endl;
+
+    imprimirArbol(raiz->izquierda, nivel + 9);
+}
+
+int main() {
+ 
+    Nodo* raiz = new Nodo(1);
+    raiz->izquierda = new Nodo(2);
+    raiz->derecha = new Nodo(3);
+    raiz->izquierda = new Nodo(4);
+    raiz->izquierda->izquierda = new Nodo(5);
+    raiz->izquierda->derecha = new Nodo(6);
+    raiz->derecha->izquierda = new Nodo(7);
+    raiz->izquierda->derecha = new Nodo(8);
+    raiz->derecha->izquierda = new Nodo(9);
+ 
+    cout << "Árbol binario:" << endl;
+    imprimirArbol(raiz, 0);
+
+    int distanciaMaxima = rangoMasAlejado(raiz);
+    cout << "El rango más alejado desde la raíz es: " << distanciaMaxima << endl;
+
+    return 0;
+}
