@@ -1,0 +1,67 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int binarySearch(const vector<int>& arr, int target) {
+    int left = 0;
+    int right = arr.size() - 1;
+
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+
+        if (arr[mid] == target) {
+            return mid;
+        } else if (arr[mid] < target) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+
+    return -1; 
+}
+
+void quicksort(vector<int>& arr, int left, int right) {
+    if (left < right) {
+        int pivot = arr[(left + right) / 2];
+        int i = left;
+        int j = right;
+
+        while (i <= j) {
+            while (arr[i] < pivot) {
+                i++;
+            }
+            while (arr[j] > pivot) {
+                j--;
+            }
+            if (i <= j) {
+                swap(arr[i], arr[j]);
+                i++;
+                j--;
+            }
+        }
+
+        quicksort(arr, left, j);
+        quicksort(arr, i, right);
+    }
+}
+
+int main() {
+    vector<int> arr = {5, 2, 9, 3, 6, 1, 11, 15, 21, 25, 60, };
+    
+    quicksort(arr, 0, arr.size() - 1);
+
+    int target = 11;
+
+    int result = binarySearch(arr, target);
+
+    if (result != -1) {
+        cout << "El elemento " << target << " se encuentra en la posición " << result << endl;
+    } else {
+        cout << "El elemento " << target << " no se encuentra en la lista" << endl;
+    }
+
+    return 0;
+}
