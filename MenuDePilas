@@ -1,0 +1,59 @@
+#include <iostream>
+#include <stack>
+
+int main () {
+    std::stack<int> Pila;
+    int opcion;
+   
+    while (true) {
+        std::cout << "\nMenu de Pila: " << std::endl;
+        std::cout << "1. Ingrese Elemento" << std::endl;
+        std::cout << "2. Sacar Elemento" << std::endl;
+        std::cout << "3. Actuliza la Cima" << std::endl;
+        std::cout << "4. Salir" << std::endl;
+        std::cout << "Seleccione una opcion ";
+        std::cin >> opcion;
+       
+        switch (opcion) {
+            case 1:
+            int valor;
+            std::cout << "Ingrese Valor Del Elemento ";
+            std::cin >> valor;
+            Pila.push (valor);
+            std::cout << "Elemento Ingressado En La Pila. " << std::endl;
+            break;
+           
+            case 2:
+            if (!Pila.empty()) {
+            std::cout <<"Elemento Sacado De La Pila: " << Pila.top() << std::endl;
+            Pila.pop();
+            }else{
+            std::cout <<"La Pila Esta Vacia: " << std::endl;
+            }
+            break;
+           
+            case 3:
+            if (!Pila.empty()) {
+            int nuevoValor;
+            std::cout << "Ingrese El Nuevo Valor Para La Cima De La Pila ";
+            std::cin >> nuevoValor;
+            Pila.top() = nuevoValor;
+            std::cout << "Elemento en la cima actulizado." << std::endl;
+            }else{
+            std::cout << "Elemento en la cima no se actulizo." << std::endl;    
+            }
+            break;
+           
+            case 4:
+            std::cout << "Saliendo Del Programa. " << std::endl;
+            return 0;
+           
+            default:
+            std::cout<< "Opcion no Valido. Porfavor elija una Opcion valida." << std::endl;
+            break;
+       
+         
+        }
+    }
+   return 0;
+}
