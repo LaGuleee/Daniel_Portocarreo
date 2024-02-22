@@ -1,0 +1,38 @@
+#include <iostream>
+#include <list>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+  list<int> miLista;
+  
+  int opcion;
+  int num;
+  
+  do {
+    cout << "1. Agregar número" << endl;
+    cout << "2. Mostrar lista ordenada" << endl;
+    cout << "3. Salir" << endl;
+    
+    cout << "Opción: ";
+    cin >> opcion;
+    
+    if(opcion == 1) {
+      cout << "Ingrese número: ";
+      cin >> num;
+      miLista.push_back(num);
+    }
+    else if(opcion == 2) {
+      miLista.sort(); // ordena la lista
+      
+      for(int x : miLista) {
+        cout << x << " ";
+      }
+      cout << "\n";
+    }
+    
+  } while(opcion != 3);
+  
+  return 0;
+}
